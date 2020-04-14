@@ -1,0 +1,30 @@
+## formated for submission to the ComputeCanada (www.computecanada.ca) slurm queing system ##
+
+#!/bin/bash
+#SBATCH --account=
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem-per-cpu=8190mb
+#SBATCH --time=03:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=
+
+
+module load nixpkgs/16.09 intel/2016.4 bowtie2/2.3.4.1
+module load samtools/1.9
+
+##export PYTHON_EGG_CACHE=${UV_DATA}/.python-eggs
+
+set -euo pipefail
+
+bowtie2-build -f -q filename.fa filename.bwt2ref
+
+bowtie2 -q --phred33 --sensitive -N 1 -I 0 -X 500 -t -p 16 -x filename.bwt2ref -1 filenametrim_1P.gz -2 filenametrim_2P.gz -S filename.bt2.self.sam
+
+samtools faidx filename.merged.fa
+
+samtools view -bt filename.merged.fa.fai filename.bt2.self.sam > filename.bt2.self.bam
+
+samtools view -b -F4 filename.bt2.self.bam > filename.bt2.self.mapped.bam
+
+samtools sort filename.bt2.self.mapped.bam > filename.bt2.self.mapped.sorted.bam
