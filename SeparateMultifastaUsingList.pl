@@ -1,6 +1,7 @@
-#!/usr/bin/env perl
-## USE: perl ./SeparateMultifastaUsingList.pl inputlistfile fastafile
+## USE: SeparateMultifastaUsingList.pl inputlistfile fastafile
+## RMPeery
 
+#!/usr/bin/env perl
 use strict;
 use warnings;
 
@@ -43,3 +44,4 @@ close FH;
 close FH1;
 close OUT;
 #close OUT1;
+## remove comments for OUT1 if the filtered ctgs are to be kept as well ##
