@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Written by RPeery 2024
-# Creates a dada2 formated database from a UNITE database
+# Creates a dada2 formatted database from a UNITE database
 # USE: ./UNITE2dada2.sh
 
 
