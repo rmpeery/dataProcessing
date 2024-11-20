@@ -1,8 +1,9 @@
 #########################################################################
-#To compare a sequence (expSeq) to a reference (refSeq)
-#and if expSeq has an N, compare to refSeq at that same site
-#if refSeq has an N then replace N in expSeq with 0 else replace N with 1
-# RPeery 2010
+# creates a binary file comparing a sample to the reference
+# To compare a sequence (expSeq) to a reference (refSeq)
+# and if expSeq has an N, compare to refSeq at that same site
+# if refSeq has an N then replace N in expSeq with 0 else replace N with 1
+# RPeery 2016
 #USE perl ./codemissing.pl reference.fasta expSeq.fasta
 #########################################################################
 
