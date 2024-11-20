@@ -1,2 +1,2 @@
 # dataProcessing
-Common scripts for manipulating and processing transcriptome data
+Common scripts for manipulating and processing genomic data
