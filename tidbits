@@ -1,0 +1,32 @@
+Good one-liner resource: https://github.com/stephenturner/oneliners
+
+Pull best blast hit (1st line):
+awk '!seen[$1]++' Blast_output_file.txt > Besthit_Blast_output_file.txt
+
+Remove interleaved format:
+while read line; do if [ "${line:0:1}" == ">" ]; then echo -e "\n"$line; else echo $line | tr -d '\n' ; fi; done < <infile.fasta> > <outfile.fasta>
+
+Split a file by number of lines:
+split -l <number> <infile>
+
+RAxML bootstrap tree:
+raxmlHPC-PTHREADS-AVX -f b -t TREE FILE -z BOOTSTRAP_TREES -m GTRCAT -n OUTPUTNAME
+
+Supset data by row with awk:
+awk -v patt="10" '!(NR % patt)' <infile.txt >infileSubset.txt
+# ref to this forum posts: https://stackoverflow.com/questions/18352181/awk-to-print-every-nth-line-from-a-file by https://stackoverflow.com/users/1983854/fedorqui-so-stop-harming
+
+awk filter syntax:
+awk '{ if($3 >= 50) { print }}' <infile.txt >outfile.txt
+
+Count number of bp per contig - use samtools faidx or this:
+bioawk -cfastx '{print $name, length($seq)}' test-trimmed.fastq
+
+Batch rename files:
+rename 's/.fasta/_DL1.fasta/' *.fasta
+add filetype: for FILE in *; do mv ${FILE} ${FILE}.txt; done # see https://www.metagenomics.wiki/tools/ubuntu-linux/rename-multiple-files
+for f in *.fastq; do mv -- "$f" "${f%.fastq}.fastq.gz"; done # see https://linuxize.com/post/how-to-rename-files-in-linux/
+
+Duplicate lines x times in a file:
+awk '{for(i=1; i<=n; i++) print}' n=50 file # https://www.unix.com/unix-for-dummies-questions-and-answers/213795-duplicate-line-n-times.html
+
