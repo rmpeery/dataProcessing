@@ -5,7 +5,7 @@
 # uses a trinity assembly that has gone through gclust
 ###
 
-bioawk -c fastx '{ print $name, length($seq) }' <DfirPanTome.fasta >temp.SAF
+bioawk -c fastx '{ print $name, length($seq) }' <infile.fasta >temp.SAF
 awk '{print $1}' temp.SAF >chr.txt
 sed -i 's/=\[/=/g' chr.txt
 sed -i 's/\]//g' chr.txt
@@ -18,7 +18,7 @@ awk -F'_' '{print $1"_"$2"_"$3"_"$4"_"$5}' chr.txt >tmp && mv tmp chr.txt
 paste chr.txt temp.SAF >tmp && mv tmp temp.SAF
 awk '{print $1,$2,"1-"$3,"+"}' <temp.SAF >tmp && mv tmp temp.SAF
 echo "GeneID  Chr Start End Strand" >head.txt
-cat head.txt temp.SAF >DfirPanTome.SAF
+cat head.txt temp.SAF >outfile.SAF
 #check file
-head DfirPanTome.SAF
+head outfile.SAF
 rm head.txt temp.SAF chr.txt
